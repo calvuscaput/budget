@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
-import './App.module.sass';
+import classes from  './App.module.sass';
+
+import Layout from './hoc/Layout/Layout'
+import Budget from './containers/Budget/Budget';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-      Hello
+      <div className={classes.App}>
+        <Layout>
+          <Budget />
+        </Layout>
       </div>
+      
     );
   }
 }
