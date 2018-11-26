@@ -1,3 +1,5 @@
 export {
-  addItem
+  addItem,
+  removeItem,
+  mobileShowItem
 } from './budget'

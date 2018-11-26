@@ -6,8 +6,21 @@
     align-items: flex-end
     justify-content: space-between
     flex-wrap: wrap
+    @media screen and (max-width: 600px)
+      flex-direction: column
+    div
+      width: 20%
+      text-align: left
+      @media screen and (max-width: 600px)
+        width: 100%
+      label 
+        display: inline-block
+        margin-left: 2px
+        @media screen and (max-width: 600px)
+          margin: 15px 2px 3px 
     input
       height: 37px
+      width: 100%
       padding-left: 10px
       background: #50597b
       font: inherit
@@ -17,20 +30,6 @@
       &:focus
         outline: none
         border-color: #11a8ab
-    button
-      height: 37px
-      padding: 0 23px
-      color: inherit
-      background: #11a8ab
-      font-size: 17px
-      font-weight: 700
-      text-align: center
-      border: none
-      outline: none
-      border-radius: 5px
-      transition: background .3s
-      &:hover
-        background: #0F9295
     select
       height: 37px
       color: inherit
@@ -43,6 +42,8 @@
       background: #50597b
       font-size: 17px
       text-align: center
+      @media screen and (max-width: 600px)
+        width: 100%
       option:first-child
         background-color: #ff3c65
       option:last-child

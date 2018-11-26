@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './Adder.module.sass';
 
+import uuid from 'uuid/v1';
+import Button from '../Button/Button'
+
 import * as actions from '../../store/actions/index';
 class Adder extends Component {
   state = {
@@ -11,11 +14,10 @@ class Adder extends Component {
     name: ''
 
   }
+
   addhandler = (e) => {
     e.preventDefault();
-    console.log(this.state);
-    this.props.onAddIngredient(this.state.name, this.state.type, this.state.category, this.state.value)
-    
+    this.props.onAddItem(this.state.name, this.state.type, this.state.category, this.state.value, uuid());
   }
 
   formChangeHandler = (event) => {    
@@ -60,12 +62,12 @@ class Adder extends Component {
             <label>Сумма: </label><input value={this.state.value} type="text" id="value" onChange={this.formChangeHandler}/>
           </div>
           <div className={classes.Field}>
-          <label>Назавание: </label><input value={this.state.name} type="text" id="name" onChange={this.formChangeHandler}/>
+            <label>Назавание: </label><input value={this.state.name} type="text" id="name" onChange={this.formChangeHandler}/>
           </div>
           <div className={classes.Field}>
-          <label>Категория: </label><input value={this.state.category} type="text" id="category" onChange={this.formChangeHandler}/>
+            <label>Категория: </label><input value={this.state.category} type="text" id="category" onChange={this.formChangeHandler}/>
           </div>
-          <button onClick={this.addhandler}>Добавить</button>
+          <Button click={(e) => this.addhandler(e)}>Добавить</Button>
         </form>
       </div>
      );
@@ -74,7 +76,7 @@ class Adder extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddIngredient: (name, itemType, category, value) => dispatch(actions.addItem(name, itemType, category, value)),
+    onAddItem: (name, itemType, category, value, key) => dispatch(actions.addItem(name, itemType, category, value, key))
   }
 }
  

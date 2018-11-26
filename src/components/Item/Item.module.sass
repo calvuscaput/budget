@@ -1,23 +1,23 @@
 .Item
-  display: flex
-  align-items: center
-  justify-content: flex-start
-  margin-bottom: 11px
-  span
-    text-align: left
-    padding: 3px
-    display: inline-block
-    overflow: auto
+  p
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    margin-bottom: 11px
+    padding: 3px 0
+    span
+      text-align: left
+      padding: 0 3px
+      display: inline-block
 .ItemType
-  width: 20px
+  flex: 0 0 20px
 .ItemValue
-  width: 65px
+  flex: 0 0 65px
 .ItemName
-  width: 25%
-  margin-left: 20px
+  flex: 0 0 30%
+  @media screen and (max-width: 490px)
+    flex-basis: 64%
 .ItemCategory
-  width: 25%
-
 .Negative
   border-bottom: 2px solid #ff3c65
   .ItemType
@@ -26,3 +26,17 @@
   border-bottom: 2px solid #28a745
   .ItemType
     color: #28a745
+.DesktopView
+  flex: 0 1 100%
+  text-align: right!important
+  display: flex!important
+  align-items: center
+  justify-content: space-between
+  @media screen and (max-width: 490px)
+    display: none!important
+.MobileView
+  margin: 7px auto
+  display: inline-block
+  width: 100%
+  text-align: left
+  
