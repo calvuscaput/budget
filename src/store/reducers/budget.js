@@ -1,7 +1,73 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    items: [],
+    items: [
+      {
+        type: 'deduct',
+        name: 'хрень',
+        value: 100,
+        category: '1',
+        key: '1',
+        mobileTrigger: false
+      },
+      {
+        type: 'deduct',
+        name: 'хрень',
+        value: 100,
+        category: '1',
+        key: '2',
+        mobileTrigger: false
+      },
+      {
+        type: 'append',
+        name: 'хрень',
+        value: 100,
+        category: '2',
+        key: '3',
+        mobileTrigger: false
+      },
+      {
+        type: 'append',
+        name: 'хрень',
+        value: 100,
+        category: '2',
+        key: '4',
+        mobileTrigger: false
+      },
+      {
+        type: 'deduct',
+        name: 'хрень',
+        value: 100,
+        category: '3',
+        key: '5',
+        mobileTrigger: false
+      },
+      {
+        type: 'deduct',
+        name: 'хрень',
+        value: 100,
+        category: '3',
+        key: '6',
+        mobileTrigger: false
+      },
+      {
+        type: 'deduct',
+        name: 'хрень',
+        value: 100,
+        category: '3',
+        key: '7',
+        mobileTrigger: false
+      },
+      {
+        type: 'append',
+        name: 'хрень',
+        value: 100,
+        category: '4',
+        key: '8',
+        mobileTrigger: false
+      },
+      
+    ],
     positiveAmount: 0,
     negativeAmount: 0,
     amount: 0
@@ -32,10 +98,10 @@ const recountAmounts = (items) => {
   items.map(item => {
     item.type === 'append' ?
     amounts.positiveAmount = amounts.positiveAmount + item.value :
-    amounts.negativeAmount = amounts.negativeAmount - item.value;
+    amounts.negativeAmount = amounts.negativeAmount + item.value;
     return null
   })
-  amounts.amount = amounts.positiveAmount + amounts.negativeAmount;
+  amounts.amount = amounts.positiveAmount - amounts.negativeAmount;
 
   return amounts
 }

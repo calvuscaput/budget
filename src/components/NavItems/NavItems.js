@@ -7,9 +7,9 @@ const navItems = () => {
   return ( 
     <header className={[classes.NavItems, 'Block'].join(' ')}>
       <ul>
-        <NavItem>Бюджет</NavItem>
-        <NavItem>Категории</NavItem>
-        <NavItem>Авторизация</NavItem>
+        <NavItem link="/" exact>Бюджет</NavItem>
+        <NavItem link="/stats">Категории</NavItem>
+        <NavItem link="/auth">Авторизация</NavItem>
       </ul>
     </header>
    );

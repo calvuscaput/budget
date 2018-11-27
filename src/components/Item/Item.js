@@ -2,7 +2,7 @@ import React from 'react';
 
 import classes from './Item.module.sass';
 
-import Button from '../Button/Button'
+import Button from '../UI/Button/Button'
 const item = (props) => {
 
   let itemTypeSym = '-';

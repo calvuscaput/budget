@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import classes from './Adder.module.sass';
 
 import uuid from 'uuid/v1';
-import Button from '../Button/Button'
+import Button from '../UI/Button/Button'
 
 import * as actions from '../../store/actions/index';
 class Adder extends Component {
