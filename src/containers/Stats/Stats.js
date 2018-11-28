@@ -16,6 +16,7 @@ class Stats extends Component {
     
     props.items.map(item => {
       let amount = 0;
+      item.category = item.category.toLowerCase();
       if(item.type === 'append') {
         amount = props.positiveAmount
         if (categories.positive[item.category]) {
