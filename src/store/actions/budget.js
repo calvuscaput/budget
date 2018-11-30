@@ -61,7 +61,7 @@ export const sendItem = (itemData, token) => {
       
     })
     .catch(error => {
-      dispatch(itemLoadingFail(error.response.data.error));
+      dispatch(itemLoadingFail(error));
       
     })
   }
@@ -75,7 +75,10 @@ export const removeRemoteData = (key, token) => {
     dispatch(itemLoadingStart());
     axios.delete(`/items/${key}.json` + queryparams)
     .then(response => {
-      dispatch(removeItem(key))
+      if (response) {
+        dispatch(removeItem(key))
+      }
+      dispatch(itemLoadingEnd());      
     })
     .catch(error => {
       dispatch(itemLoadingFail(error.response.data.error));
@@ -100,8 +103,9 @@ export const setItems = (userId, token) => {
 
       }
     })
-    .catch(error => {      
-       dispatch(itemLoadingFail(error.response.data.error));
+    .catch(error => {
+            
+       dispatch(itemLoadingFail(error));
     })
   }
 }

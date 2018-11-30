@@ -4,10 +4,11 @@ import * as actions from '../../store/actions/index';
 import classes from './Budget.module.sass';
 
 import LineLoader from '../../components/UI/LineLoader/LineLoader';
-
+import axios from '../../axios-data';
 import Adder from '../../components/Adder/Adder';
 import Amounts from '../../components/Amounts/Amounts';
 import ItemList from '../../components/ItemList/ItemList';
+import withError from '../../hoc/withErrorHandler/withErrorHandler';
 
 class Budget extends Component {
   
@@ -58,4 +59,4 @@ const mapDispatchToProps = dispatch => {
     onSetItems: (userId, token) => dispatch(actions.setItems(userId, token))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Budget);
+export default connect(mapStateToProps, mapDispatchToProps)(withError(Budget, axios));

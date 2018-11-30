@@ -56,6 +56,26 @@ class Auth extends Component {
     }
   }
 
+  errorHandler = () => {   
+    switch (this.props.error.message) {
+      case 'EMAIL_EXISTS':
+        return 'Пользователь с такой электронной почтой уже существует в системе.'    
+      case 'OPERATION_NOT_ALLOWED':
+        return 'Вход временно недоступен.'    
+      case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+        return 'Слишком много попыток входа. Попробуйте позже.'    
+      case 'EMAIL_NOT_FOUND':
+        return 'Пользователя с такой электронной почтой не существует.'    
+      case 'INVALID_PASSWORD':
+        return 'Неверный пароль.'    
+      case 'USER_DISABLED':
+        return 'Пользователь недоступен.'    
+      default:
+        return 'Что-то пошло не так. Попробуйте запрос позже';
+    }
+
+  }
+
   formChangeHandler = (event) => {
     switch (event.target.id) {
       case 'email':
@@ -79,6 +99,10 @@ class Auth extends Component {
     let authRedirect = null;
     if (this.props.isAuthenticated) {
       authRedirect = <Redirect to={this.props.authRedirectPath} />
+    }
+    let errorMessage = null;
+    if (this.props.error) {
+      errorMessage = <FormErrorMessage>{this.errorHandler()}</FormErrorMessage>
     }
 
     const loader = this.props.loading ? <LineLoader/> : null;
@@ -108,6 +132,7 @@ class Auth extends Component {
           <Button dis={!this.state.valid} click={this.signinHandler}>Авторизация</Button>
           <Button dis={!this.state.valid} click={this.signupHandler}>Регистрация</Button>
         </div>
+        {errorMessage}
       </form>
      );
   }
