@@ -95,7 +95,7 @@ const clearItems = (state) => {
   let updatedState = {
     ...state,
     items: [],
-  }  
+  }
   return updatedState
 }
 
