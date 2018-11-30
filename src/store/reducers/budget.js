@@ -1,76 +1,12 @@
 import * as actionTypes from '../actions/actionTypes';
 
 const initialState = {
-    items: [
-      {
-        type: 'deduct',
-        name: 'хрень',
-        value: 100,
-        category: '1',
-        key: '1',
-        mobileTrigger: false
-      },
-      {
-        type: 'deduct',
-        name: 'хрень',
-        value: 100,
-        category: '1',
-        key: '2',
-        mobileTrigger: false
-      },
-      {
-        type: 'append',
-        name: 'хрень',
-        value: 100,
-        category: '2',
-        key: '3',
-        mobileTrigger: false
-      },
-      {
-        type: 'append',
-        name: 'хрень',
-        value: 100,
-        category: '2',
-        key: '4',
-        mobileTrigger: false
-      },
-      {
-        type: 'deduct',
-        name: 'хрень',
-        value: 100,
-        category: '3',
-        key: '5',
-        mobileTrigger: false
-      },
-      {
-        type: 'deduct',
-        name: 'хрень',
-        value: 100,
-        category: '3',
-        key: '6',
-        mobileTrigger: false
-      },
-      {
-        type: 'deduct',
-        name: 'хрень',
-        value: 100,
-        category: '3',
-        key: '7',
-        mobileTrigger: false
-      },
-      {
-        type: 'append',
-        name: 'хрень',
-        value: 100,
-        category: '4',
-        key: '8',
-        mobileTrigger: false
-      },
-      
-    ],
+    items: [],
     positiveAmount: 0,
     negativeAmount: 0,
-    amount: 0
+    amount: 0,
+    loading: false,
+    error: null
   }
 
 
@@ -123,6 +59,8 @@ const addItem = (state, action) => {
     ...updatedState,
     ...recountAmounts(updatedState.items)
   }
+  updatedState.error = null;
+  updatedState.loading = false;
   return updatedState;
 
 }
@@ -136,12 +74,50 @@ const removeItem = (state, action) => {
   updatedState.items = updatedState.items.filter((item) => {
     return item.key !== action.key;
   });
+  updatedState.loading = false
   updatedState = {
     ...updatedState,
     ...recountAmounts(updatedState.items)
   }
   return updatedState
 }
+
+const itemLoadingStart = (state) => {
+  let updatedState = {
+    ...state,
+    items: [...state.items],
+  }
+  updatedState.loading = true
+  return updatedState
+}
+
+const clearItems = (state) => {
+  let updatedState = {
+    ...state,
+    items: [],
+  }  
+  return updatedState
+}
+
+const itemLoadingFail = (state, action) => {
+  let updatedState = {
+    ...state,
+    items: [...state.items],
+  }
+  updatedState.loading = false;
+  updatedState.error = action.error;
+  return updatedState
+}
+
+const itemLoadingEnd = (state) => {
+  let updatedState = {
+    ...state,
+    items: [...state.items],
+  }
+  updatedState.loading = false
+  return updatedState
+}
+
 
   const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -151,6 +127,14 @@ const removeItem = (state, action) => {
         return removeItem(state, action);
       case actionTypes.MOBILE_SHOW_ITEM:
         return mobileShowItem(state, action);
+      case actionTypes.ITEM_LOADING_START:
+        return itemLoadingStart(state)
+      case actionTypes.ITEM_LOADING_FAIL:
+        return itemLoadingFail(state, action)
+      case actionTypes.ITEM_LOADING_END:
+        return itemLoadingEnd(state, action)
+      case actionTypes.CLEAR_ITEMS:
+        return clearItems(state)
       default:
         return state;
   

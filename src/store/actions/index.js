@@ -1,5 +1,16 @@
 export {
   addItem,
   removeItem,
-  mobileShowItem
-} from './budget'
+  mobileShowItem,
+  sendItem,
+  removeRemoteData,
+  setItems,
+  clearItems
+} from './budget';
+
+export {
+  auth,
+  logout,
+  setAuthRedirectPath,
+  authCheckState
+} from './auth';

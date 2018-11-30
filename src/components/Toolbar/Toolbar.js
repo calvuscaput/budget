@@ -2,9 +2,9 @@ import React from 'react';
 
 import NavItems from '../NavItems/NavItems';
 
-const toolbar = (props) => {
+const toolbar = () => {
   return (
-   <NavItems />
+   <NavItems/>
    );
 }
  

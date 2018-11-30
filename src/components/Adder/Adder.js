@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classes from './Adder.module.sass';
 
-import uuid from 'uuid/v1';
 import Button from '../UI/Button/Button'
 import Input from '../UI/Input/Input';
 import FormErrorMessage from '../UI/FormErrorMessage/FormErrorMessage';
@@ -27,9 +26,15 @@ class Adder extends Component {
     }
   }
 
-  addHandler = e => {
-    e.preventDefault(); 
-    this.props.onAddItem(this.state.name, this.state.type, this.state.category, +this.state.value, uuid());
+  addHandler = e => {    
+    e.preventDefault();    
+    this.props.onSendItem({
+      name: this.state.name,
+      itemType: this.state.type,
+      value: +this.state.value,
+      category: this.state.category,
+      userId: this.props.user
+    }, this.props.token)
   }
 
 static getDerivedStateFromProps(nextProps, state) {
@@ -84,7 +89,6 @@ static getDerivedStateFromProps(nextProps, state) {
     
   }
   render() { 
-    
     const selectStyle = {
       backgroundColor: this.state.type === 'deduct' ? '#ff3c65' : '#28a745'
     };
@@ -123,8 +127,9 @@ static getDerivedStateFromProps(nextProps, state) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAddItem: (name, itemType, category, value, key) => dispatch(actions.addItem(name, itemType, category, value, key))
+    onSendItem: (item, token) => dispatch(actions.sendItem(item, token))
   }
 }
+
  
 export default connect(null, mapDispatchToProps)(Adder);
